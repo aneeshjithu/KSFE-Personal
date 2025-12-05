@@ -118,7 +118,7 @@ const Layout: React.FC = () => {
 
           <div className="mt-auto rounded-2xl border border-white/50 bg-white/30 p-4 text-sm backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/50">
             <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Currently signed in</p>
-            <p className="truncate text-base font-semibold text-slate-800 dark:text-white">{user?.email ?? 'guest@chitty.app'}</p>
+            <p className="truncate text-base font-semibold text-slate-800 dark:text-white">{user?.email}</p>
             <Button
               variant="outline"
               className="mt-4 w-full justify-center rounded-xl border-slate-200 bg-white/60 text-slate-700 shadow-sm hover:bg-white"

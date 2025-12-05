@@ -1,19 +1,18 @@
 import React from 'react';
-// import { Navigate, useLocation } from 'react-router-dom';
-// import { useAuth } from '../../context/AuthContext';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // const { user, loading } = useAuth();
-  // const location = useLocation();
+  const { user, loading } = useAuth();
+  const location = useLocation();
 
-  // Temporary bypass for development
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-  // if (!user) {
-  //   return <Navigate to="/login" state={{ from: location }} replace />;
-  // }
+  if (!user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
   return <>{children}</>;
 };
