@@ -89,10 +89,6 @@ const Login: React.FC = () => {
             <p className="text-center text-sm text-muted-foreground w-full">
               Don't have an account? <span className="font-semibold text-emerald-600">Contact admin</span>.
             </p>
-            <div className="text-xs text-center text-muted-foreground/70 mt-2 p-2 bg-slate-50 rounded-md">
-              <p className="font-semibold mb-1">Demo Credentials:</p>
-              <p>admin@ksfe.com / admin123</p>
-            </div>
           </CardFooter>
         </Card>
       </BlurFade>
