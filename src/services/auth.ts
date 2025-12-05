@@ -1,46 +1,102 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut as firebaseSignOut } from 'firebase/auth';
+// Simple User interface for text file-based authentication
+export interface User {
+  email: string;
+  uid: string;
+}
 
-// TODO: Replace with your Firebase project configuration
-// You can find this in the Firebase Console -> Project Settings -> General -> Your apps
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+// Storage key for session
+const SESSION_KEY = 'ksfe_auth_session';
+
+// Fetch credentials from text file
+const fetchCredentials = async (): Promise<Map<string, string>> => {
+  try {
+    const response = await fetch('/credentials.txt');
+    const text = await response.text();
+    const credentials = new Map<string, string>();
+    
+    text.split('\n').forEach(line => {
+      const trimmedLine = line.trim();
+      if (trimmedLine) {
+        const [email, password] = trimmedLine.split(':');
+        if (email && password) {
+          credentials.set(email.trim(), password.trim());
+        }
+      }
+    });
+    
+    return credentials;
+  } catch (error) {
+    console.error("Error loading credentials", error);
+    throw new Error("Failed to load credentials");
+  }
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
-
-export const signInWithGoogle = async () => {
+// Sign in with email and password
+export const signInWithEmail = async (email: string, password: string): Promise<User> => {
   try {
-    const result = await signInWithPopup(auth, googleProvider);
-    return result.user;
+    const credentials = await fetchCredentials();
+    const storedPassword = credentials.get(email);
+    
+    if (!storedPassword || storedPassword !== password) {
+      throw new Error("Invalid email or password");
+    }
+    
+    // Create user object
+    const user: User = {
+      email,
+      uid: btoa(email) // Simple UID generation using base64 encoding
+    };
+    
+    // Store session in localStorage
+    localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+    
+    return user;
   } catch (error) {
-    console.error("Error signing in with Google", error);
+    console.error("Error signing in with email", error);
     throw error;
   }
 };
 
-export const signOut = async () => {
+// Sign out
+export const signOut = async (): Promise<void> => {
   try {
-    await firebaseSignOut(auth);
+    localStorage.removeItem(SESSION_KEY);
   } catch (error) {
     console.error("Error signing out", error);
     throw error;
   }
 };
 
-export const signInWithEmail = async (email: string, password: string) => {
+// Get current user from session
+export const getCurrentUser = (): User | null => {
   try {
-    const result = await signInWithEmailAndPassword(auth, email, password);
-    return result.user;
+    const sessionData = localStorage.getItem(SESSION_KEY);
+    if (sessionData) {
+      return JSON.parse(sessionData) as User;
+    }
+    return null;
   } catch (error) {
-    console.error("Error signing in with email", error);
-    throw error;
+    console.error("Error getting current user", error);
+    return null;
   }
+};
+
+// Listen to auth state changes (simplified version)
+export const onAuthStateChanged = (callback: (user: User | null) => void): (() => void) => {
+  // Initial call
+  callback(getCurrentUser());
+  
+  // Listen for storage changes (for multi-tab support)
+  const handleStorageChange = (e: StorageEvent) => {
+    if (e.key === SESSION_KEY) {
+      callback(getCurrentUser());
+    }
+  };
+  
+  window.addEventListener('storage', handleStorageChange);
+  
+  // Return unsubscribe function
+  return () => {
+    window.removeEventListener('storage', handleStorageChange);
+  };
 };
