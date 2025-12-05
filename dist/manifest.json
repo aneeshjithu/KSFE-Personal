@@ -1,0 +1,28 @@
+{
+  "name": "Chitty — Personal Application",
+  "short_name": "Chitty",
+  "description": "A whimsical, offline-first chitty & finance companion.",
+  "theme_color": "#fdf2f8",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/chitty-icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/chitty-icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/chitty-maskable.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

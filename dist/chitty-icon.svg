@@ -1,0 +1,30 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="140" fill="url(#paint0_linear)" />
+  <g filter="url(#filter0_f)">
+    <circle cx="160" cy="140" r="120" fill="#FBD38D" fill-opacity="0.65"/>
+  </g>
+  <g filter="url(#filter1_f)">
+    <circle cx="360" cy="360" r="140" fill="#A78BFA" fill-opacity="0.6"/>
+  </g>
+  <path d="M150 326C150 238 214 176 299 176C332 176 360 187 382 205L350 244C335 231 319 224 299 224C246 224 207 267 207 326C207 385 246 428 299 428C331 428 356 418 378 397L410 436C381 468 346 488 299 488C214 488 150 414 150 326Z" fill="white" fill-opacity="0.9"/>
+  <path d="M223 326C223 283 253 252 299 252C321 252 340 260 356 275L324 312C316 305 308 302 299 302C271 302 255 321 255 326C255 331 271 350 299 350C308 350 316 347 324 339L356 377C340 392 321 400 299 400C253 400 223 369 223 326Z" fill="url(#paint1_linear)"/>
+  <defs>
+    <filter id="filter0_f" x="0" y="-20" width="320" height="320" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="60"/>
+    </filter>
+    <filter id="filter1_f" x="140" y="140" width="440" height="440" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="70"/>
+    </filter>
+    <linearGradient id="paint0_linear" x1="65" y1="66" x2="447" y2="458" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF8FB1"/>
+      <stop offset="0.5" stop-color="#FEC260"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear" x1="223" y1="252" x2="365" y2="401" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF9B73"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+

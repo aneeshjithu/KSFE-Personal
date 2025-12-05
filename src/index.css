@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 210 40% 5%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 35% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 37% 14%;
+    --primary: 158 64% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 173 58% 39%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 186 94% 43%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 158 64% 52%;
+    --radius: 1rem;
+    --success: 142 76% 45%;
+    --warning: 38 92% 50%;
+    --info: 199 89% 48%;
+  }
+
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 158 64% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 186 94% 43%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 158 64% 52%;
+    --success: 142 76% 45%;
+    --warning: 38 92% 50%;
+    --info: 199 89% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont,
+      'Segoe UI', sans-serif;
+    @apply bg-background text-foreground antialiased;
+    background-image: 
+      radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.06), transparent 40%),
+      radial-gradient(circle at 85% 10%, rgba(20, 184, 166, 0.08), transparent 45%),
+      radial-gradient(circle at 50% 90%, rgba(6, 182, 212, 0.05), transparent 50%),
+      linear-gradient(135deg, rgba(249, 250, 251, 1), rgba(243, 244, 246, 1));
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/80 dark:bg-white/8 backdrop-blur-2xl border border-white/70 dark:border-white/15 shadow-[0_25px_100px_rgba(15,23,42,0.15)]
+      transition-all duration-300;
+  }
+
+  .glass-panel:hover {
+    @apply shadow-[0_30px_120px_rgba(15,23,42,0.2)] border-white/80 dark:border-white/20;
+  }
+
+  .fancy-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(16, 185, 129, 0.7) transparent;
+  }
+
+  .fancy-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .fancy-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .fancy-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #10b981, #14b8a6, #06b6d4);
+    border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+
+  .fancy-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #34d399, #2dd4bf, #22d3ee);
+  }
+
+  /* New utility classes */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-500;
+  }
+
+  .shine-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine-effect::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 70%
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+  }
+
+  @keyframes shine {
+    0% {
+      left: -50%;
+    }
+    100% {
+      left: 150%;
+    }
+  }
+  .glass-strong {
+    @apply bg-white/90 dark:bg-slate-900/90 backdrop-blur-3xl border border-white/60 dark:border-white/10 shadow-[0_30px_100px_rgba(15,23,42,0.2)];
+  }
+
+  .glass-modern {
+    @apply bg-white/40 dark:bg-white/5 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-sm transition-all duration-300 focus:bg-white/60 focus:border-emerald-500/50 focus:ring-4 focus:ring-emerald-500/10;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+}
